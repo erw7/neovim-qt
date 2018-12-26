@@ -613,6 +613,7 @@ void Shell::setNeovimCursor(quint64 row, quint64 col)
 {
 	update(neovimCursorRect());
 	m_cursor_pos = QPoint(col, row);
+	qApp->inputMethod()->setInputItemRectangle(neovimCursorRect());
 	update(neovimCursorRect());
 }
 
