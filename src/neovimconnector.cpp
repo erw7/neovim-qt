@@ -222,6 +222,22 @@ NeovimApi4* NeovimConnector::api4()
 }
 
 /**
+ * @warning Do not call this before NeovimConnector::ready as been signaled
+ * @see NeovimConnector::isReady
+ */
+NeovimApi6* NeovimConnector::api6()
+{
+	if ( !m_api6 ) {
+		if (m_api_compat <= 6 && 6 <= m_api_supported) {
+			m_api6 = new NeovimApi6(this);
+		} else {
+			qWarning() << "This instance of neovim not support api level 6";
+		}
+	}
+	return m_api6;
+}
+
+/**
  * Launch an embedded Neovim process
  * @see processExited
  */
